@@ -1,0 +1,381 @@
+<!doctype html><html>
+    
+<head>
+  <title>sockette</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style id="socketteStyle">
+  
+body {
+    
+    --col: 90;
+    --back-color: white;
+    --trans-speed: 50ms;
+    
+    --main-color: hsla(var(--col), 80%, 60%, 1);
+    --outline-color: hsla(var(--col), 80%, 10%, 1);
+    
+    background-color: var(--back-color);
+    xxxoverflow: hidden;
+}
+
+#holder {
+    margin: auto;
+    width: 250px;
+    background-color: var(--main-color);
+    border: 10px solid var(--outline-color);
+}
+
+svg {
+    isolation: isolate;
+    overflow: visible;
+}
+  
+path {
+    transition: d ease-out var(--trans-speed);
+}
+
+.outline {
+    stroke: var(--outline-color);
+    stroke-width: 3px;
+    stroke-miterlimit: 30;
+    vector-effect: non-scaling stroke;
+    fill: none;
+    
+}
+    
+#sockHolder {
+    transform:scale(25);
+    stroke: none;
+    stroke-width: 1px;
+    fill: darkred;
+    opacity: 2.0;
+}
+
+#mouth {
+    
+    fill: var(--outline-color);
+    
+    --norm-dn: 'M 5.5 9 Q 9 9.7 12 9 Q 11 9.2 10.4 10 Q 11 10.2 12 10 Q 9 11 6 11 Q 6 11 6 11 Q 5.9 10 5.5 9 Z M 6 8.5 L 5.7 9.2 L 4.8 9.1 Q 5.5 9.1 6 8.5 Z';
+    
+    --norm-up: 'M 5 8 Q 10 9.5 12 8 Q 10.5 9 10 10.2 Q 11 10.5 12 10.5 Q 9 11.5 6 11.2 Q 6 11.2 6 11.2 Q 5.9 10 5.5 9 Z M 5.6 7.3 L 5.25 8.25 L 4.65 8.15 Q 5.2 8 5.6 7.3 Z';
+    
+    --anger-mn: 'M 5.5 9 Q 9 10 12 9 Q 11 9.4 10.4 9.5 Q 12 9.5 12 9.5 Q 8 9.8 6.1 9.7 Q 5.4  9.7 5.4 9.7 Q 5.5 9 5.5 9 Z M 6 8.6 L 5.6 9.1 L 4.8 9.15 Q 5.5 9 6 8.6 Z';
+    
+    --anger-dn: 'M 5.5 9 Q 9 10 12 9 Q 11 9.4 10.4 9.8 Q 12 10 12 10 Q 8 9.8 6.1 10.7 Q 5.4  9.7 5.4 9.7 Q 5.5 9 5.5 9 Z M 6 8.6 L 5.6 9.1 L 5.1 9.15 Q 5.5 8.7 6 8.6 Z';
+    
+    --anger-up: 'M 5.5 8 Q 9 10 12 8 Q 10.5 9 10 10 Q 11 10.3 12 10.5 Q 9 10 6 11.2 Q 5.2 9.5 5.2 9.5 Q 5.5 8 5.5 8 Z M 5.9 7.8 L 5.55 8.25 L 4.95 8.15 Q 5.3 8.1 5.9 7.8 Z';
+    
+    --anger-mx: 'M 5.5 8 Q 9 10 12 8 Q 10.5 9 10 10 Q 11 12.3 12 12.5 Q 9 12 6 13.2 Q 5.2 9.5 5.2 9.5 Q 5.5 8 5.5 8 Z M 5.9 7.8 L 5.55 8.25 L 4.95 8.15 Q 5.3 8.1 5.9 7.8 Z';
+    
+}
+
+#cheekline {
+    
+    fill: var(--outline-color);
+    
+    --norm-dn: 'M 5.5 7.7 Q 4.8 7.9 4.3 8.6 Q 5.2 10 5.7 12.2 Q 5 10 3.9 8.5 Q 4.5 7.7 5.5 7.7 Z';
+    
+    --norm-up: 'M 5 6.5 Q 4.5 6.6 3.9 7.5 Q 5 9.5 5.7 13 Q 4.5 8.5 3.4 7.5 Q 4 6.7 5 6.5 Z';
+    
+    --anger-dn: var(--norm-dn);
+    --anger-up: var(--norm-up);
+    --anger-mx: 'M 5 6.5 Q 4.5 6.6 3.9 7.5 Q 5 9.5 5.7 14 Q 4.5 8.5 3.4 7.5 Q 4 6.7 5 6.5 Z';
+}
+
+#undertone {
+    fill: var(--main-color);
+    --norm-dn: 'M 5.5 7.7 L 5.7 12.2 L 4.3 8.6 Q 4.5 7.7 5.5 7.7 Z';
+    --norm-up: 'M 5 6.5 L 5.7 12.2 L 3.9 7.5 Q 4.4 6.6 5 6.5 Z';
+    --anger-dn: var(--norm-dn);
+    --anger-up: var(--norm-up);
+}
+
+  </style>
+</head>
+
+<body>
+<div id="holder">
+    
+<svg viewBox="0 0 430 400" width="390pt" height="400pt">
+<g id="sockHolder" vector-effect="non-scaling-stroke">
+ 
+  <g id="ombre" transform="translate(-4.0,-5)">
+      
+    <g id="cheek" opacity=1.0 transform="translate(-0.6,0)">
+      <path id="undertone" data-sock="norm anger"/>
+      <path id="cheekline" data-sock="norm anger"/>
+    </g>
+    
+    <path id="mouth" data-sock="norm anger"/>
+    
+  </g>
+  
+</g>
+</svg>
+
+</div>
+
+</body>
+
+<script data-sockette='{ "selector": "sock" }'>
+//////////////////////////////////////////////////////{
+// queviva - sock puppetry for svg - dec 5781
+//
+// DEBUGG {
+//  'use strict';
+//  'use strong';
+//  localStorage.clear();
+// }
+//////////////////////////////////////////////////////}
+
+new (function() {
+    
+    //////////////////////////////////////////////////
+    // prefs & vars {
+    
+    // default prefs for all Sockette objects {
+    const defPrefs = {
+        selector: 'sockette',
+        speed : { min: '50ms', max: '250ms' },
+        updn : 'dn',
+        curPath : 'norm'
+    };
+    //}
+    
+    // try to get options set in script's data-params {
+    const opts = JSON.parse(((document.querySelector(`
+        script[src*="${ defPrefs.selector }"][src$=".js"],
+        script[data-${ defPrefs.selector }]
+    `) || {}).dataset || {})[defPrefs.selector] || '{}');
+    //}
+    
+    // clean up options {
+    for (let p in opts) {
+        if (defPrefs[p] === undefined) delete opts[p];
+    }
+    //}
+    
+    // over-rite default prefs with script's data-param {
+    for (let p in defPrefs) {
+        
+        opts[p] = opts[p] !== undefined ? opts[p] : defPrefs[p];
+
+    }
+    
+    //}
+    
+    // types of paths {
+    const allPaths = {
+        norm    : [],
+        anger   : [],
+        shock   : []
+    };
+    //}
+    
+    // keeping track of key pressing {
+    const keyHolder = {
+        Space: false,
+        KeyA: false,
+        KeyD: false,
+        KeyF: false,
+        ShiftRight: false,
+        ShiftLeft: false,
+        shift: false
+    };
+    //}
+       
+    //}
+    
+    //////////////////////////////////////////////////
+    // the object for this app {
+    const Sockette = function(obj) {
+    
+        this.obj = obj;
+        this.objS = window.getComputedStyle(obj);
+        this.coords = {};
+        
+        // get any path-list {
+        let pathList = (
+            
+            ((obj.dataset || '')[opts.selector] || 'norm')
+            .split(/\s+/g)
+        
+        );
+        //}
+        
+        // create coords
+        for (let p in pathList) {
+            
+            if (allPaths[pathList[p]] !== undefined) {
+            
+                let dn = this.objS.getPropertyValue('--' + pathList[p] + '-dn').replace(/\"/g, '').trim() || 'M0 0Z';
+                let up = this.objS.getPropertyValue('--' + pathList[p] + '-up').replace(/\"/g, '').trim() || dn;
+                let mn = this.objS.getPropertyValue('--' + pathList[p] + '-mn').replace(/\"/g, '').trim() || dn;
+                let mx = this.objS.getPropertyValue('--' + pathList[p] + '-mx').replace(/\"/g, '').trim() || up;
+            
+                this.coords[pathList[p]] = {
+                    'dn' : dn,
+                    'up' : up,
+                    'mn' : mn,
+                    'mx' : mx
+                };
+                
+                allPaths[pathList[p]].push(obj.id);
+            
+            } //else { delete pathList[p]; }
+            
+        }
+    
+        
+    };
+    //}
+
+    //////////////////////////////////////////////////
+    // methods {
+        
+    // how to draw the paths
+    const drawPaths = e => {
+    
+        allPaths[opts.curPath].forEach(p => {
+            
+            this[p].obj.setAttribute('d',
+                this[p].coords[opts.curPath][
+                        e.shiftKey ?
+                            opts.updn === 'up' ? 'mx' : 'mn'
+                        :
+                        opts.updn
+                ]
+            );
+            
+        });
+    
+    };
+    
+    // method to reset
+    const reset = e => {
+        for (let k in keyHolder) {
+            keyHolder[k] = false;
+        }
+        opts.curPath = 'norm';
+        opts.updn = 'dn';
+        drawPaths({ shiftKey: false });
+    };
+    
+    //}
+
+    //////////////////////////////////////////////////
+    // lizzers {
+        
+    // listen for key pressing {
+    document.addEventListener('keydown', e => {
+        
+        // ignore if key not used or already pressed
+        if (!keyHolder.hasOwnProperty(e.code) ||
+             keyHolder[e.code] === true
+        ) {
+            return;
+        }
+        
+        // change up|dn on space bar
+        else if (e.code === 'Space') {
+            
+            opts.updn = 'up';
+            
+        }
+        
+        // max speed on f key
+        else if (e.code === 'KeyF') {
+            
+            document.body.style.setProperty(
+                '--trans-speed',
+                opts.speed.max
+            );
+            
+        }
+        
+        // for all non-shift keys
+        else if(!e.shiftKey) {
+            
+            // activate that key
+            keyHolder[e.code] = true;
+            
+            // set the current active path
+            opts.curPath = {
+                KeyA: 'anger',
+                KeyD: 'anger'
+            }[e.code] || 'norm';
+            
+        }
+        
+        // redraw the paths
+        drawPaths(e);
+        
+    });
+    //}
+    
+    // listen for key upping {
+    document.addEventListener('keyup', e => {
+        
+        // ignore if not used
+        if (!keyHolder.hasOwnProperty(e.code)) {
+            return;
+        }
+        
+        // swap up|dn on space bar
+        if (e.code === 'Space') {
+            opts.updn = 'dn';
+        }
+        
+        // min speed on f key
+        else if (e.code === 'KeyF') {
+            document.body.style.setProperty(
+                '--trans-speed',
+                opts.speed.min
+            );
+        }
+        
+        // otherwise return to normal
+        else if (keyHolder[e.code] === true) {
+            keyHolder[e.code] = false;
+            opts.curPath = 'norm';
+        }
+        
+        drawPaths(e);
+            
+    });
+    //}
+
+    // oy vey - listen for complete loss of focus
+    window.addEventListener('blur', reset);
+    
+    //}
+    
+    //////////////////////////////////////////////////
+    // init on win.load {
+    window.addEventListener('load', e => {
+    
+        // loop through all data-param-specified objects
+        document.querySelectorAll(
+    
+            // that are NOT a script tag
+            `[data-${opts.selector}]:not(script)`
+    
+        ).forEach(obj => {
+    
+            // make each one an object
+    
+            this[obj.id] = new Sockette(obj);
+    
+        });
+    
+        // draw on load
+        drawPaths({ shiftKey: false });
+    
+    });
+    //}
+    
+})();
+
+</script>
+
+</html>
