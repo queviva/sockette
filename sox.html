@@ -1,0 +1,336 @@
+<!doctype html>
+
+<html lang="en">
+<head><title>sox</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="roofiemation.js"></script>
+<style id="demoStyles">
+
+@font-face {
+    font-family : luckiest guy;
+    src : url(luckiest.ttf);
+}
+
+:root {
+    --main-color: #666;
+    --greyed-out: #888;
+    --back-color: #666;
+    --holder-back: #111;
+    --faded-txt: rgba(255, 255, 255, 0.5);
+    --trans-speed: 0.3s;
+    
+    --nose-H: 20;
+    --nose-S: 100%;
+    --nose-L: 80%;
+    
+    --midness:  calc(0.37 * var(--nose-L));
+    --darkness: calc(0.18 * var(--nose-L));
+    --shade-opacity: 0.4;
+    --anispeed: 800ms;
+}
+
+* {
+    box-sizing: border-box;
+    word-wrap: break-word;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+    background-color: var(--back-color);
+    font-size: 22px;
+    text-align: justify;
+    -webkit-hyphens: auto;
+    -moz-hyphens: auto;
+    -epub-hyphens: auto;
+    hyphens: auto;
+}
+
+.holder {
+	position: relative;
+    color: var(--main-color);
+    background-color: var(--holder-back);
+    overflow: hidden;
+    margin: auto;
+    width: 100%;
+    max-width: 700px;
+}
+
+a {
+    text-decoration: none;
+    color: var(--greyed-out);
+}
+
+a:hover, a:visited {
+    color: var(--greyed-out);
+    transition: color linear var(--trans-speed);
+}
+
+b {
+    color: var(greyed-out);
+}
+
+pre {
+    background-color: var(--main-color);
+    margin: 0px;
+    padding: 10px;
+    color: #fff;
+    overflow: auto;
+}
+
+hr {
+    border-top: 1px solid var(--main-color);
+    border-bottom: none;
+    border-left: none;
+    border-right: none;
+    margin: 7px 0px 7px 0px;
+}
+
+.qr {
+    padding: 10px;
+}
+
+.qa:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.qa > div {
+    float: left;
+    padding: 10px;
+    height: auto;
+}
+
+.qa > div:nth-child(1) {
+  width: 65%;
+}
+
+.qa > div:nth-child(2) {
+  width: 35%;
+}
+
+.qb:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.qb > div {
+    float: left;
+    padding: 10px;
+    height: auto;
+}
+
+.qb > div:nth-child(1) {
+  width: 35%;
+}
+
+.qb > div:nth-child(2) {
+  width: 65%;
+}
+
+.mobr {
+    display: none;
+}
+
+input[type=range] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    display: inline-block;
+    margin: 0;
+    height: var(--thumbH);
+    width: 80%;
+    border-radius: calc(var(--thumbH) / 2);
+    background-color: hsl(var(--nose-H), var(--nose-S), var(--midness));
+}
+
+input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    background-color: hsl(var(--nose-H), var(--nose-S), var(--nose-L));
+    opacity: 1.7;
+    height: var(--thumbH);
+    margin-bottom: 0px;
+    width: var(--thumbH);
+    border: calc(0.1 * var(--thumbH)) solid;
+    border-color: hsl(var(--nose-H), var(--nose-S), calc(.7 * var(--nose-L)));
+    border-radius: calc(var(--thumbH) / 2);
+}
+
+input[type=range]:focus {
+    outline: none;
+}
+
+/*possibly a portrait mobi-fone*/
+@media screen and (max-width:500px) {
+
+	.qa > div:nth-child(1),
+	.qa > div:nth-child(2),
+	.qb > div:nth-child(1),
+	.qb > div:nth-child(2)
+	{
+    	width: 100%;
+    }
+    
+    .mobr {
+        display: inline-block;
+    }
+    
+}
+
+/*possibly a mobile landscaper*/
+@media screen and (orientation: landscape) and (max-width: 760px) {
+
+    
+}
+
+.signature {
+    text-align: right;
+    font-family: 'luckiest guy';
+    font-style: italic;
+    height: 200px;
+    user-select: none;
+}
+</style>
+</head>
+
+<body>
+<div class="holder">
+    
+    <div intro class="qr">
+        <style>
+        </style>
+        <svg viewbox="-8 -8 16 16" style="
+            border: 1px solid #fff;
+            height: 350px;
+            width: 100%;
+            overflow: visible;
+            background-color: #888;
+        ">
+            <g transform="translate(-8.4 -10)">
+            <path id="mouth" data-mouth data-roofie /></g>
+            <ellipse cx="0" cy="0" rx=".2" ry=".2" fill="#c30" />
+        </svg>
+        
+        <script>
+            const toNumArray = s => s.match(/-?[\d\.]+/g).map(p => Number(p));
+            const trans = (v,x,y) => {
+                v = v.split(/([a-zA-Z]+)/);
+                v.pop();
+                v.shift();
+                v = v.map(p => {
+                    
+                    if (p.match(/[a-zA-Z]/) || p === ' ') {
+                        return p
+                    } else {
+                        
+                        let q = toNumArray(p);
+                        q = q.map((z,i) => {
+                            if (i%2 === 0) {
+                                return (q[i] + x).toFixed(1);
+                            } else {
+                                return (q[i] + y).toFixed(1);
+                            }
+                        })
+                        return (q.join(' '));
+                    }
+                })
+                return v;
+            }
+        </script>
+        
+        <style id="shit000">
+
+            #mouth {
+                    
+                --sock-space-dn: 'M 5.7 9.4 Q 9.5 9.8 12 9.4 Q 11 9.6 10.4 9.8 Q 11 10.1 12 10.1 Q 9 10 6 10.4 Q 5.7 9.9 5.7 9.9  Q 5.7 9.4 5.7 9.4 Z M 5.1 9.4 Q 5.8 9.55 6.1 9 L 5.8 9.6 Z';
+                
+                --sock-space-up: 'M 5.6 9 Q 9 9.8 12 9 Q 10.9 9.4 10.6 9.8 Q 11 10.1 11.4 10.2 Q 9 10 6 10.45 Q 5.6 9.75 5.6 9.75 Q 5.6 9 5.6 9 Z M 5 9.1 Q 5.7 9.2 6 8.5  L 5.7 9.2  Z';
+                
+                --sock-space-shift-dn: 'M 5.7 9.4 Q 8.8 10 12 9.4 Q 11 9.65 10.6 9.8 Q 11 10.0 12 10.1 Q 8.0 9.9 6 10.4 Q 5.8 9.9 5.8 9.9 Q 5.7 9.4 5.7 9.4 Z M 5.1 9.4 Q 5.8 9.55 6.1 9 L 5.8 9.6 Z';
+                
+                --sock-space-shift-up: 'M 5.5 8.8 Q 9 9.6 11.9 8.8 Q 10.8 9.4 10.6 9.9 Q 11 10.2 11.4 10.3 Q 9 10.1 6 10.55 Q 5.6 9.8 5.6 9.8 Q 5.5 8.8 5.5 8.8 Z M 5 8.9 Q 5.7 8.9 6 8.4  L 5.7 9  Z';
+                
+                --sock-keya-dn: 'M 5.5 9 Q 9 10 12 9 Q 11 9.4 10.4 9.8 Q 12 10 12 10 Q 8 9.8 6.1 10.7 Q 5.4  9.7 5.4 9.7 Q 5.5 9 5.5 9 Z M 5.1 9.15 Q 5.5 9 6 8.6 L 5.6 9.1 Z';
+                
+                --sock-keya-up: 'M 5.5 8 Q 9 10 12 8 Q 10.5 9 10 10 Q 11 10.3 12 10.5 Q 9 10 6 11.2 Q 5.2 9.5 5.2 9.5 Q 5.5 8 5.5 8 Z M 4.95 8.15 Q 5.3 8.1 5.9 7.8 L 5.55 8.25 Z';
+                
+                --sock-keya-shift-dn: 'M 5.5 9 Q 9 10 12 9 Q 11 9.4 10.4 9.5 Q 12 9.5 12 9.5 Q 8 9.8 6.1 9.7 Q 5.4  9.7 5.4 9.7 Q 5.5 9 5.5 9 Z M 4.8 9.15 Q 5.5 9 6 8.6 L 5.6 9.1 Z';
+                
+                --sock-keya-shift-up: 'M 5.5 8 Q 9 10 12 8 Q 10.5 9 10 10 Q 11 12.3 12 12.5 Q 9 12 6 13.2 Q 5.2 9.5 5.2 9.5 Q 5.5 8 5.5 8 Z M 4.95 8.15 Q 5.3 8.1 5.9 7.8 L 5.55 8.25 Z';
+                
+                --fast: 100ms;
+                --slow: 400ms;
+                
+                --up: var(--sock-space-up);
+                --dn: var(--sock-space-dn);
+                
+                fill: #000;
+                d: path(var(--sock-space-dn));
+               
+                animation-duration: var(--fast);
+                
+            }
+            
+            .spaceDN {
+                --path: var(--up);
+                animation-name: spaceAni;
+            }
+            
+            .spaceUP {
+                --path: var(--dn);
+                animation-name: spaceAni;
+            }
+            
+            @keyframes spaceAni {
+                100%{
+                    d:path(var(--path));
+                }
+            }
+            
+        </style>
+        
+        <script>
+            window.addEventListener('keydown', e => {if(!e.repeat){
+                
+                if (e.code.match('Shift')) {
+                    mouth.style.animationDuration = 'var(--slow)';
+                }
+                else if (e.code === 'Space') {
+                    mouth.roofie.mate('spaceDN');
+                }
+                else if( e.code === 'KeyA') {
+                 mouth.style.setProperty('--up','var(--sock-keya-up)')
+                 mouth.style.setProperty('--dn','var(--sock-keya-shift-dn)')
+                }
+            
+            }});
+            window.addEventListener('keyup', e => {
+                
+                if (e.code.match('Shift')) {
+                    mouth.style.animationDuration = 'var(--fast)';
+                }
+                else if (e.code === 'Space') {
+                    mouth.roofie.mate('spaceUP');
+                }
+                else {//if (e.code === 'KeyA') {
+                 mouth.style.setProperty('--up','var(--sock-space-up)')
+                 mouth.style.setProperty('--dn','var(--sock-space-dn)')
+                 mouth.roofie.mate('spaceUP');
+                }
+            });
+            
+
+
+        </script>
+    </div>
+
+</div>
+</body>
+
+<script>
+    
+</script>
+
+</html>
